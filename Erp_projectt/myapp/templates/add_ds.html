@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Designation</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <style>
+        body {
+            background: linear-gradient(120deg, #4f8cff 0%, #2355e6 100%);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 420px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+            padding: 38px 32px 32px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 140px;
+            height: 140px;
+            background: rgba(79, 140, 255, 0.12);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #2355e6;
+            margin-bottom: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 2.1rem;
+            position: relative;
+            z-index: 1;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        form label {
+            font-weight: 600;
+            color: #2d3a4b;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+        form input, form select, form textarea {
+            padding: 12px 14px;
+            border: 1.5px solid #d1d9e6;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f9fafb;
+            transition: border 0.2s, box-shadow 0.2s;
+            margin-bottom: 2px;
+        }
+        form input:focus, form select:focus, form textarea:focus {
+            border-color: #4f8cff;
+            box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.13);
+            outline: none;
+        }
+        button[type='submit'] {
+            background: linear-gradient(90deg, #4f8cff 0%, #2355e6 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        button[type='submit']:hover {
+            background: linear-gradient(90deg, #2355e6 0%, #4f8cff 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .form-errors {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 15px;
+            background: #ffeaea;
+            border: 1px solid #e74c3c;
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+        .icon-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .icon-header i {
+            font-size: 2.7rem;
+            color: #4f8cff;
+            background: #eaf2ff;
+            border-radius: 50%;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(79, 140, 255, 0.10);
+        }
+        @media (max-width: 500px) {
+            .container {
+                max-width: 98vw;
+                padding: 18px 6vw 18px 6vw;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+        /* Style Django form fields rendered as_p */
+        .container p {
+            margin: 0 0 10px 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .container p input,
+        .container p select,
+        .container p textarea {
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon-header">
+            <i class="fa-solid fa-building-columns"></i>
+        </div>
+        <h1>Add Designation</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {% if myform.errors %}
+                
+            {% endif %}
+            {{ myform.as_p }}
+            <button type="submit">
+                <i class="fa-solid fa-plus"></i>
+                Save Designation
+            </button>
+        </form>
+    </div>
+</body>
+</html>
+
+
+

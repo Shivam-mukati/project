@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Department</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f0ff 0%, #b6d0f7 100%);
+            min-height: 100vh;
+        }
+        .container {
+            margin-top: 40px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 6px 32px rgba(52, 104, 185, 0.13);
+            padding: 36px 32px;
+        }
+        h2 {
+            color: #2257a7;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .table thead {
+            background: linear-gradient(90deg, #2257a7 60%, #3b82f6 100%);
+            color: #fff;
+        }
+        .table-striped>tbody>tr:nth-of-type(odd) {
+            background-color: #f0f6ff;
+        }
+        .table-hover tbody tr:hover {
+            background: linear-gradient(90deg, #e3f0ff 60%, #b6d0f7 100%);
+            transition: background 0.3s;
+        }
+        .btn-action {
+            margin-right: 6px;
+        }
+        .search-form input[type="text"] {
+            border-radius: 20px 0 0 20px;
+            border: 1.5px solid #3b82f6;
+            box-shadow: none;
+        }
+        .search-form input[type="text"]:focus {
+            border-color: #2257a7;
+            box-shadow: 0 0 0 0.2rem rgba(59,130,246,.15);
+        }
+        .search-form button {
+            border-radius: 0 20px 20px 0;
+            background: linear-gradient(90deg, #2257a7 60%, #3b82f6 100%);
+            border: none;
+            color: #fff;
+            transition: background 0.2s;
+        }
+        .search-form button:hover {
+            background: linear-gradient(90deg, #3b82f6 60%, #2257a7 100%);
+        }
+        .add-btn {
+            float: right;
+            background: linear-gradient(90deg, #2257a7 60%, #3b82f6 100%);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.10);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .add-btn:hover {
+            background: linear-gradient(90deg, #3b82f6 60%, #2257a7 100%);
+            box-shadow: 0 4px 16px rgba(59,130,246,0.18);
+        }
+        .btn-warning {
+            background: linear-gradient(90deg, #4f8cff 60%, #2257a7 100%) !important;
+            border: none;
+            color: #fff !important;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn-warning:hover {
+            background: linear-gradient(90deg, #2257a7 60%, #4f8cff 100%) !important;
+            color: #fff !important;
+        }
+        .btn-danger {
+            background: linear-gradient(90deg, #ff5e62 60%, #3b82f6 100%) !important;
+            border: none;
+            color: #fff !important;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn-danger:hover {
+            background: linear-gradient(90deg, #3b82f6 60%, #ff5e62 100%) !important;
+            color: #fff !important;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 18px 6px;
+            }
+            .add-btn {
+                float: none;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Department List</h2>
+        <a href="{% url 'add_dp' %}" class="btn add-btn mb-3">
+            <i class="fas fa-plus"></i> Add Department
+        </a>
+        <form method="POST" action="" class="d-flex mb-4 search-form">
+            {% csrf_token %}
+            <input type="text" name="dp_name" id="dp_name" class="form-control" placeholder="Search Department...">
+            <button type="submit" class="btn"><i class="fas fa-search"></i></button>
+        </form>
+        <table class="table table-striped table-hover table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Department Name</th>
+                    <th>Description</th>
+                    <th colspan="2" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in dp %}
+                <tr>
+                    <td>{{d.dp_id}}</td>
+                    <td>{{d.dp_name}}</td>
+                    <td>{{d.desciptions}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'upd_dp' d.dp_id %}" class="btn btn-warning btn-sm btn-action">
+                            <i class="fas fa-edit"></i> Update
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'del_dp' d.dp_id %}" class="btn btn-danger btn-sm btn-action">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Bootstrap JS (optional, for dropdowns etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
